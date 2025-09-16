@@ -46,7 +46,7 @@ This project requires a C++ compiler (like g++ or Clang).
 
 ## About the Project
 
-This was a first-year university assignment focused on building a solid understanding of C++ basics, including functions, loops, switch statements, and string handling. The project demonstrates proficiency in developing a functional, interactive command-line tool.
+This C++ project was my first programming effort from 2019, created while I was learning the fundamentals of the language. It served as a practical application of core concepts like functions, loops, and conditional statements, resulting in a functional, interactive command-line tool for string manipulation.
 
 ---
 
