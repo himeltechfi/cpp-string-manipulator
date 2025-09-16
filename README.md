@@ -12,6 +12,10 @@ A command-line application developed in C++ for performing various string manipu
   - Sort letters in alphabetical order.
 - **Interactive Menu:** A user-friendly menu for selecting different operations.
 
+## Demo
+
+![C++ String Manipulator Demo](https://i.imgur.com/vHq05sJ.png)
+
 ## How to Compile and Run
 
 This project requires a C++ compiler (like g++ or Clang).
