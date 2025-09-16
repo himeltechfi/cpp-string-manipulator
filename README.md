@@ -14,7 +14,7 @@ A command-line application developed in C++ for performing various string manipu
 
 ## Demo
 
-![C++ String Manipulator Demo](https://i.imgur.com/vHq05sJ.png)
+![C++ String Manipulator Demo](https://i.imgur.com/nSwtCnX.png)
 
 ## How to Compile and Run
 
