@@ -1,0 +1,130 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <random>
+
+using namespace std;
+
+// Function to get a word or phrase from the user
+string GetWord(void) {
+    string localString;
+    cout << "\n\nPlease enter a word/phrase: ";
+    cin.ignore();
+    getline(cin, localString);
+    cout << "You have entered: " << localString << " as your current word/phrase" << endl << endl;
+    return localString;
+}
+
+// Function to reverse the input word/phrase
+string ReverseWord(string originalString) {
+    string localString = originalString;
+    int len = originalString.length();
+    originalString = "";
+    for (int i = len - 1; i >= 0; i--) {
+        originalString = originalString + localString[i];
+    }
+    cout << "Your word after reversing is: " << originalString << endl << endl;
+    return originalString;
+}
+
+// Function to convert the input to uppercase
+string ToUpper(string originalString) {
+    string localString = originalString;
+    for (int i = 0; localString[i]; i++) {
+        localString[i] = toupper(localString[i]);
+    }
+    cout << "Your word after converting into uppercase: " << localString << endl;
+    return localString;
+}
+
+// Function to convert the input to lowercase
+string ToLower(string originalString) {
+    string localString = originalString;
+    for (int i = 0; localString[i]; i++) {
+        localString[i] = tolower(localString[i]);
+    }
+    cout << "Your word after converting into lowercase: " << localString << endl;
+    return localString;
+}
+
+// Function to randomize the letters in the input
+string RandomiseWord(string originalString) {
+    string localString = originalString;
+    random_shuffle(localString.begin(), localString.end());
+    cout << "Your word after randomise: " << localString << endl;
+    return localString;
+}
+
+// Function to sort the letters in the input alphabetically
+string OrderWord(string originalString) {
+    string localString = originalString;
+    sort(localString.begin(), localString.end());
+    cout << "Your word in order: " << localString << endl;
+    return localString;
+}
+
+// Function to handle the "Quit" option
+void QuitNow(void) {
+    string quit;
+    cout << "\nAre you sure (Y/N)?: " << endl;
+    cin >> quit;
+    if (quit == "Y" || quit == "y" || quit == "Yes") {
+        cout << "\nThank you for choosing string Manipulation. " << endl << endl;
+        exit(EXIT_SUCCESS);
+    }
+}
+
+// The main menu function
+void Menu(void) {
+    string currentString = "012345";
+    string modifiedString;
+    string originalString;
+    char menuOption;
+
+    do {
+        cout << "C++ String Manipulation challenge" << endl << endl;
+        cout << "\t1. Enter a word or phrase (Current word/phrase is: " << currentString << ")" << endl;
+        cout << "\t2. Reverse the current word." << endl;
+        cout << "\t3. Convert the current word to uppercase." << endl;
+        cout << "\t4. Convert the current word to lowercase." << endl;
+        cout << "\t5. Randomise the letters in the current word." << endl;
+        cout << "\t6. Sort the letters in the current word in ascending alphabetic order." << endl;
+        cout << "\t0. Quit the program." << endl << endl;
+        cout << "\tThe last word/phrase returned was: " << modifiedString << endl;
+        cout << "\nPlease enter a valid option(1-6 or 0 to quit): ";
+        cin >> menuOption;
+
+        switch (menuOption) {
+            case '1':
+                currentString = GetWord();
+                break;
+            case '2':
+                modifiedString = ReverseWord(currentString);
+                break;
+            case '3':
+                modifiedString = ToUpper(currentString);
+                break;
+            case '4':
+                modifiedString = ToLower(currentString);
+                break;
+            case '5':
+                modifiedString = RandomiseWord(currentString);
+                break;
+            case '6':
+                modifiedString = OrderWord(currentString);
+                break;
+            case '0':
+                QuitNow();
+                break;
+            default:
+                cout << "\nUnfortunately, " << menuOption << " is not a valid option, please try again." << endl << endl;
+                break;
+        }
+    } while (true);
+}
+
+// The entry point of the program
+int main() {
+    Menu();
+    return 0;
+}

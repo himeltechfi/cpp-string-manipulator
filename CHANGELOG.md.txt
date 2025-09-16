@@ -1,0 +1,22 @@
+# Changelog
+
+All notable changes to this project are documented below.
+
+## [v1.0.0] - 2019-03-31
+
+### Added
+- Created `GetWord` function to get user input.
+- Added functions for reversing, converting case (upper/lower), randomizing, and sorting strings.
+- Implemented a user-friendly menu and an endless loop for interaction.
+- Developed a `QuitNow` function to exit the program.
+
+### Changed
+- Improved the `GetWord` function to handle full sentences instead of single words.
+- Refactored code to improve clarity and structure.
+- Updated menu logic to display last modified word and a default message for invalid options.
+- Switched the menu variable from `int` to `char` and used ASCII values in the switch statement for robustness.
+
+### Fixed
+- Addressed bugs in the `QuitNow` function to properly return to the menu on 'n' input.
+- Resolved issues with uppercase and lowercase functions to correctly process the entire string.
+- Fixed an issue where the random function was not working by adjusting the menu call.
