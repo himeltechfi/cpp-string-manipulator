@@ -1,72 +1,76 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
-#include <random>
+#include <algorithm> // Required for std::reverse, std::sort, and std::transform
+#include <random>    // For std::default_random_engine and std::shuffle
+#include <cctype>    // For the toupper and tolower functions used by std::transform
+#include <chrono>    // Used to seed the random number generator
 
+// Using the standard namespace to simplify code, but in larger projects,
+// it's often better to use std:: prefix for clarity.
 using namespace std;
 
-// Function to get a word or phrase from the user
+// This function gets a word or phrase from the user.
+// It uses cin.ignore() to clear the input buffer, which is a common fix
+// for problems with mixing cin >> and getline().
 string GetWord(void) {
     string localString;
     cout << "\n\nPlease enter a word/phrase: ";
+    // This line clears any leftover newline characters from the input buffer.
     cin.ignore();
     getline(cin, localString);
     cout << "You have entered: " << localString << " as your current word/phrase" << endl << endl;
     return localString;
 }
 
-// Function to reverse the input word/phrase
+// This function reverses a string using the modern std::reverse algorithm.
+// It is more efficient and easier to read than a manual loop.
 string ReverseWord(string originalString) {
-    string localString = originalString;
-    int len = originalString.length();
-    originalString = "";
-    for (int i = len - 1; i >= 0; i--) {
-        originalString = originalString + localString[i];
-    }
-    cout << "Your word after reversing is: " << originalString << endl << endl;
+    // The string is passed by value, so we are modifying a copy.
+    // Creating a new string to be explicit about the result.
+    string reversedString = originalString;
+    reverse(reversedString.begin(), reversedString.end());
+    cout << "Your word after reversing is: " << reversedString << endl << endl;
+    return reversedString;
+}
+
+// This function converts a string to uppercase.
+// It uses std::transform, which is the standard way to apply a function
+// to every character in a range.
+string ToUpper(string originalString) {
+    transform(originalString.begin(), originalString.end(), originalString.begin(), ::toupper);
+    cout << "Your word after converting into uppercase: " << originalString << endl;
     return originalString;
 }
 
-// Function to convert the input to uppercase
-string ToUpper(string originalString) {
-    string localString = originalString;
-    for (int i = 0; localString[i]; i++) {
-        localString[i] = toupper(localString[i]);
-    }
-    cout << "Your word after converting into uppercase: " << localString << endl;
-    return localString;
-}
-
-// Function to convert the input to lowercase
+// This function converts a string to lowercase using the same modern approach.
 string ToLower(string originalString) {
-    string localString = originalString;
-    for (int i = 0; localString[i]; i++) {
-        localString[i] = tolower(localString[i]);
-    }
-    cout << "Your word after converting into lowercase: " << localString << endl;
-    return localString;
+    transform(originalString.begin(), originalString.end(), originalString.begin(), ::tolower);
+    cout << "Your word after converting into lowercase: " << originalString << endl;
+    return originalString;
 }
 
-// Function to randomize the letters in the input
+// This function randomizes the letters in a string using std::shuffle,
+// which is the modern and correct replacement for std::random_shuffle.
+// It seeds the random number generator using the system clock for better randomness.
 string RandomiseWord(string originalString) {
-    string localString = originalString;
-    random_shuffle(localString.begin(), localString.end());
-    cout << "Your word after randomise: " << localString << endl;
-    return localString;
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    shuffle(originalString.begin(), originalString.end(), default_random_engine(seed));
+    cout << "Your word after randomise: " << originalString << endl;
+    return originalString;
 }
 
-// Function to sort the letters in the input alphabetically
+// This function sorts the letters in a string alphabetically.
+// It uses the efficient std::sort algorithm.
 string OrderWord(string originalString) {
-    string localString = originalString;
-    sort(localString.begin(), localString.end());
-    cout << "Your word in order: " << localString << endl;
-    return localString;
+    sort(originalString.begin(), originalString.end());
+    cout << "Your word in order: " << originalString << endl;
+    return originalString;
 }
 
-// Function to handle the "Quit" option
+// Handles the "Quit" option. It confirms the user's choice before exiting.
 void QuitNow(void) {
     string quit;
-    cout << "\nAre you sure (Y/N)?: " << endl;
+    cout << "\nAre you sure (Y/N)?: ";
     cin >> quit;
     if (quit == "Y" || quit == "y" || quit == "Yes") {
         cout << "\nThank you for choosing string Manipulation. " << endl << endl;
@@ -74,11 +78,10 @@ void QuitNow(void) {
     }
 }
 
-// The main menu function
+// The main menu function, which serves as the program's control loop.
 void Menu(void) {
     string currentString = "012345";
-    string modifiedString;
-    string originalString;
+    string modifiedString = ""; // Initialize to an empty string to avoid junk output
     char menuOption;
 
     do {
@@ -123,7 +126,7 @@ void Menu(void) {
     } while (true);
 }
 
-// The entry point of the program
+// The entry point of the program.
 int main() {
     Menu();
     return 0;
